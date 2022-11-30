@@ -1,5 +1,17 @@
+import java.util.Scanner;
 public class InnaBookStore {
     public static void main(String [] args) {
-        System.out.println("Hello World!!!");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("--------------------------------");
+        System.out.println("|  Welcome to InnaBook Store   |");
+        System.out.println("--------------------------------");
+
+        String textInput = "";
+        while(!textInput.equals("exit")) {
+            CommonOutput.menu();
+            System.out.print("> ");
+            textInput = sc.nextLine();
+        }
     }
 }
