@@ -7,6 +7,8 @@ public class InnaBookStore {
         System.out.println("|  Welcome to InnaBook Store   |");
         System.out.println("--------------------------------");
 
+        Users.checkCredentials();
+
         String textInput = "";
         while(!textInput.equals("exit")) {
             CommonOutput.menu();
