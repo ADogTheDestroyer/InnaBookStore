@@ -19,6 +19,7 @@
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
       <object connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" object-ref="schemas/lookinnabookdb/tables/books" />
+      <object connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" object-ref="schemas/lookinnabookdb/tables/users" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
