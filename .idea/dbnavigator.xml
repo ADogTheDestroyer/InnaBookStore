@@ -18,12 +18,13 @@
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
-      <object connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" object-ref="schemas/lookinnabookdb/tables/users" />
+      <object connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" object-ref="schemas/lookinnabookdb/tables/books" />
     </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" dataset="innastoredb.users" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" dataset="innabookdb.users" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" dataset="lookinnabookdb.books" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="2e7bfac2-7845-4da8-9d83-19c3d779df8f" dataset="lookinnabookdb.users" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">

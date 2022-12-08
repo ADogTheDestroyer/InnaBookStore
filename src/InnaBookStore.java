@@ -14,6 +14,40 @@ public class InnaBookStore {
             CommonOutput.menu();
             System.out.print("> ");
             textInput = sc.nextLine();
+
+            // if they choose to search for a book by...
+            if(textInput.equals("1")) {
+                while(true) {
+                    CommonOutput.searchMenu();
+                    System.out.print("> ");
+                    textInput = sc.nextLine();
+
+                    // search by interfaces
+                    if(textInput.equals("1")) {
+                        while(true) {
+                            System.out.print("Search for Title: ");
+                            textInput = sc.nextLine();
+
+                            if(textInput.equals("-1")) break;
+
+                            Books.displayBooks(Books.getBooksByTitle(textInput));
+                        }
+                    }
+                    else if(textInput.equals("3")) {
+                        while(true) {
+                            System.out.print("Search for Genre: ");
+                            textInput = sc.nextLine();
+
+                            if(textInput.equals("-1")) break;
+
+                            Books.displayBooks(Books.getBooksByGenre(textInput));
+                        }
+                    }
+                    else if(textInput.equals("4")) {
+                        break;
+                    }
+                }
+            }
         }
     }
 }
