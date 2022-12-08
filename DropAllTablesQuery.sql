@@ -1,0 +1,3 @@
+USE LookInnABookDb;
+DROP TABLE Books;
+DROP TABLE Users;
