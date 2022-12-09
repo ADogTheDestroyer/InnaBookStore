@@ -11,7 +11,7 @@ public class Users {
     public static Statement statement;
     static {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
+            connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
 
             statement = connection.createStatement();
         } catch (Exception e) {
@@ -31,11 +31,11 @@ public class Users {
             String password = sc.nextLine();
 
             try {
-                ResultSet resultSet = statement.executeQuery("select * from users WHERE uname = '" + username + "' AND pword = '" + password + "'");
+                ResultSet resultSet = statement.executeQuery("select * from users WHERE username = '" + username + "' AND pword = '" + password + "'");
 
                 String fetchedUsername = "", fetchedPassword = "";
                 while (resultSet.next()) {
-                    fetchedUsername = resultSet.getString("uname");
+                    fetchedUsername = resultSet.getString("username");
                     fetchedPassword = resultSet.getString("pword");
                 }
 
