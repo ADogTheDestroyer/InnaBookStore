@@ -12,6 +12,9 @@ INSERT INTO Users (uname, pword, fname, lname, isOwner)
 VALUES ('Robo.adam10', 'password', 'Adam', 'Lin', true);
 
 INSERT INTO Users (uname, pword, fname, lname, isOwner)
+VALUES ('ColeKaufs', 'password', 'Cole', 'Kaufman', true);
+
+INSERT INTO Users (uname, pword, fname, lname, isOwner)
 VALUES ('Jimbo234', 'sdfnsljk', 'Jim', 'Harper', false);
 
 INSERT INTO Users (uname, pword, fname, lname, isOwner)
