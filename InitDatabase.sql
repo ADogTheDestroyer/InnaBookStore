@@ -11,8 +11,8 @@ CREATE TABLE Addresses(
     street_num INT NOT NULL,
     unit INT,
     city VARCHAR(50) NOT NULL,
-    province VARCHAR(2) NOT NULL,
-    postal VARCHAR(6) NOT NULL
+    province VARCHAR(15) NOT NULL,
+    postal VARCHAR(6) NOT NULL,
     country VARCHAR(25) NOT NULL
 
 );
@@ -28,7 +28,7 @@ CREATE TABLE Publishers(
 
 CREATE TABLE Phone_numbers(
     pid INT, FOREIGN KEY (pid) REFERENCES Publishers (pid),
-    phone_num INT NOT NULL CHECK (phone_num between 0 and 9999999999),
+    phone_num BIGINT NOT NULL CHECK (phone_num between 0 and 9999999999),
     PRIMARY KEY (pid, phone_num)
 );
 
@@ -52,8 +52,8 @@ CREATE TABLE Users(
 );
 
 CREATE TABLE User_addrs(
-    username VARCHAR(30) NOT NULL, FOREIGN KEY (username) REFERENCES Users (username),
-    addr_id INT NOT NULL, FOREIGN KEY (addr_id) REFERENCES Addresses (addr_id),
+    username VARCHAR(30), FOREIGN KEY (username) REFERENCES Users (username),
+    addr_id INT, FOREIGN KEY (addr_id) REFERENCES Addresses (addr_id),
     isShipping BOOLEAN NOT NULL,
     isBilling BOOLEAN NOT NULL,
     PRIMARY KEY(username, addr_id)
@@ -61,7 +61,7 @@ CREATE TABLE User_addrs(
 
 CREATE TABLE Orders(
     order_num INT PRIMARY KEY,
-    tracking_num INT NOT NULL,
+    tracking_num VARCHAR(10) NOT NULL,
     ord_date DATE NOT NULL,
     ord_cost NUMERIC(8,2) NOT NULL,
     username VARCHAR(30) NOT NULL, FOREIGN KEY (username) REFERENCES Users (username)
@@ -85,6 +85,13 @@ CREATE TABLE Authored(
     PRIMARY KEY(aid, isbn)
 );
 
+CREATE TABLE In_Orders(
+    isbn VARCHAR(13), FOREIGN KEY (isbn) REFERENCES Books (isbn),
+    order_num INT, FOREIGN KEY (order_num) REFERENCES Orders (order_num),
+    quantity INT NOT NULL,
+    PRIMARY KEY(isbn, order_num)
+);
+
 INSERT INTO Users (username, pword, fname, lname, isOwner)
 VALUES
 ('Robo.adam10', 'password', 'Adam', 'Lin', true),
@@ -95,20 +102,30 @@ VALUES
 ('SavingMe', 'sldkfjoeinf', 'Private', 'Ryan', false),
 ('Leon', 'soeifmoeimfos', 'Leonard', 'Hoffstater', false)
 
-INSERT INTO Addresses(addr_id, street_name, street_num, unit, city, province, postal)
+INSERT INTO Addresses(addr_id, street_name, street_num, unit, city, province, postal, country)
 VALUES
-(1, 'Del Sol', '10108', null, 'Charleston', 'West Virginia', '25321'),
-(2, 'Pawling', '53', '2', 'Bellevue', 'Washington', '98008'),
-(3, 'Pennsylvania', '39', '813', 'Charleston', 'West Virginia', '25336'),
-(4, 'Eliot', '2', null, 'Jacksonville', 'Florida', '32209'),
-(5, 'Anhalt', '523', null, 'Albuquerque', 'New Mexico', '87121'),
-(6, 'Debra', '3', '7', 'Birmingham', 'Alabama', '35290'),
-(7, 'Melvin', '59', '62', 'Las Vegas', 'Nevada', '89166'),
-(8, 'Toban', '11', null, 'New Brunswick', 'New Jersey', '08922'),
-(9, 'Nobel', '19068', null, 'Charlotte', 'North Carolina', '28242'),
-(10, 'South', '636', null, 'Gary', 'Indiana', '46406')
+(1, 'Del Sol', '10108', null, 'Charleston', 'West Virginia', '25321', 'United States'),
+(2, 'Pawling', '53', '2', 'Bellevue', 'Washington', '98008', 'United States'),
+(3, 'Pennsylvania', '39', '813', 'Charleston', 'West Virginia', '25336','United States'),
+(4, 'Eliot', '2', null, 'Jacksonville', 'Florida', '32209', 'United States'),
+(5, 'Anhalt', '523', null, 'Albuquerque', 'New Mexico', '87121', 'United States'),
+(6, 'Debra', '3', '7', 'Birmingham', 'Alabama', '35290', 'United States'),
+(7, 'Melvin', '59', '62', 'Las Vegas', 'Nevada', '89166', 'United States'),
+(8, 'Toban', '11', null, 'New Brunswick', 'New Jersey', '08922', 'United States'),
+(9, 'Nobel', '19068', null, 'Charlotte', 'North Carolina', '28242', 'United States'),
+(10, 'South', '636', null, 'Gary', 'Indiana', '46406', 'United States'),
+(11, '66 Vidon Junction', '1491', '4', 'Rochester', 'Minnesota', '55905', 'United States'),
+(12, '07561 Tony Plaza', '290', '15623', 'Indianapolis', 'Indiana', '46231', 'United States'),
+(13, '3 Elka Road', '72', '6231', 'Tallahassee', 'Florida', '32314', 'United States'),
+(14, '79970 Mariners Cove Avenue', '55', null, 'Evansville', 'Indiana', '47732', 'United States'),
+(15, '343 Muir Plaza', '80669', '91704', 'San Diego', 'California', '92170', 'United States'),
+(16, '59056 Forest Dale Point', '527', null, 'Mobile', 'Alabama', '36641', 'United States'),
+(17, '03102 Sundown Circle', '21', '520', 'Brea', 'California', '92822', 'United States'),
+(18, '776 Darwin Terrace', '923', '18', 'Charlotte', 'North Carolina', '28235', 'United States'),
+(19, '76 Jay Court', '82', '7', 'Boca Raton', 'Florida', '33487', 'United States'),
+(20, '499 Morrow Parkway', '8', '939', 'Richmond', 'Virginia', '23293', 'United States')
 
-INSERT INTO User_addrs(username, addr_id)
+INSERT INTO User_addrs(username, addr_id, isShipping, isBilling)
 VALUES
 ('Robo.adam10', 1, true, true),
 ('ColeKaufs', 2, true, true),
@@ -123,28 +140,28 @@ VALUES
 
 INSERT INTO Publishers(pid, fname, lname, email, bank_acc, addr_id)
 VALUES
-(1, 'Sacha', 'Sparey', 'ssparey0@example.com', 123513423),
-(2, 'Madison', 'Wakelin', 'mwakelin1@theguardian.com', 64532634513),
-(3, 'Colleen', 'Klosa', 'cklosa2@engadget.com', 2345342525),
-(4, 'Kaiser', 'Killick', 'kkillick3@mtv.com', 6585674235),
-(5, 'Elysia', 'Leppington', 'eleppington4@joomla.org', 74567316),
-(6, 'Jaquith', 'Bellow', 'jbellow5@washingtonpost.com', 87561356435),
-(7, 'Lyle', 'Kilfeather', 'lkilfeather6@wired.com', 5789345),
-(8, 'Armin', 'Rainon', 'arainon7@dion.ne.jp', 346792356),
-(9, 'Julie', 'Randell', 'jrandell8@engadget.com', 904675583),
-(10, 'Bidget', 'Verman', 'bverman9@illinois.edu', 486232593),
-(11, 'Carlos', 'Temperley', 'ctemperleya@washingtonpost.com', 23579235604),
-(12, 'Yanaton', 'Puddle', 'ypuddleb@zimbio.com', 3672965032),
-(13, 'Kori', 'Baldock', 'kbaldockc@nih.gov', 8553759057),
-(14, 'Collie', 'Jarmaine', 'cjarmained@pinterest.com', 234579823565),
-(15, 'Noellyn', 'Lockart', 'nlockarte@unblog.fr', 236263532),
-(16, 'Katina', 'Trenaman', 'ktrenamanf@va.gov', 2624724),
-(17, 'Virgilio', 'Kinastan', 'vkinastang@cdc.gov', 756466245),
-(18, 'Demetra', 'Pavie', 'dpavieh@multiply.com', 34564352),
-(19, 'Ajay', 'Handscombe', 'ahandscombei@sbwire.com', 74673235624),
-(20, 'Chrysler', 'Bonnesen', 'cbonnesenj@cnbc.com', 84683564),
+(1, 'Sacha', 'Sparey', 'ssparey0@example.com', 12351343, 1),
+(2, 'Madison', 'Wakelin', 'mwakelin1@theguardian.com', 64534513, 2),
+(3, 'Colleen', 'Klosa', 'cklosa2@engadget.com', 25342525, 3),
+(4, 'Kaiser', 'Killick', 'kkillick3@mtv.com', 658567235, 4),
+(5, 'Elysia', 'Leppington', 'eleppington4@joomla.org', 74567316, 5),
+(6, 'Jaquith', 'Bellow', 'jbellow5@washingtonpost.com', 8756435, 6),
+(7, 'Lyle', 'Kilfeather', 'lkilfeather6@wired.com', 5789345, 7),
+(8, 'Armin', 'Rainon', 'arainon7@dion.ne.jp', 34692356, 8),
+(9, 'Julie', 'Randell', 'jrandell8@engadget.com', 9046583, 9),
+(10, 'Bidget', 'Verman', 'bverman9@illinois.edu', 48622593, 10),
+(11, 'Carlos', 'Temperley', 'ctemperleya@washingtonpost.com', 2355604, 11),
+(12, 'Yanaton', 'Puddle', 'ypuddleb@zimbio.com', 36729032, 12),
+(13, 'Kori', 'Baldock', 'kbaldockc@nih.gov', 8557057, 13),
+(14, 'Collie', 'Jarmaine', 'cjarmained@pinterest.com', 23423565, 14),
+(15, 'Noellyn', 'Lockart', 'nlockarte@unblog.fr', 2362632, 15),
+(16, 'Katina', 'Trenaman', 'ktrenamanf@va.gov', 2624724, 16),
+(17, 'Virgilio', 'Kinastan', 'vkinastang@cdc.gov', 7564245, 17),
+(18, 'Demetra', 'Pavie', 'dpavieh@multiply.com', 34564352, 18),
+(19, 'Ajay', 'Handscombe', 'ahandscombei@sbwire.com', 7467624, 19),
+(20, 'Chrysler', 'Bonnesen', 'cbonnesenj@cnbc.com', 84683564, 20)
 
-INSERT INTO Phone_numbers(pid, phone_numbers)
+INSERT INTO Phone_numbers(pid, phone_num)
 VALUES
 (1, '2967117131'),
 (1, '7084177354'),
@@ -205,7 +222,35 @@ VALUES
 ('191711496-6', 'Candy', 54, 51, 25.88, 95, 7),
 ('908142405-X', 'Sound of Fury, The', 387, 43, 87.25, 95, 6),
 ('842953482-2', 'The Pirates of Blood River', 492, 34, 99.55, 66, 20),
-('523605904-6', 'Dead Birds', 272, 69, 85.54, 75, 20),
+('523605904-6', 'Dead Birds', 272, 69, 85.54, 75, 20)
+
+INSERT INTO Orders(order_num, tracking_num, ord_date, ord_cost, username)
+VALUES
+(1, 'SA3BX4S2K0', '9/30/2022', 335, 'KingSully'),
+(2, 'AD4H7YYZLP', '10/16/2022', 203, 'PerditaTheDog'),
+(3, '01O30K5SBC', '12/3/2022', 495, 'ForrestPlump'),
+(4, '02ARHINU73', '2/21/2022', 1280, 'SavingMe'),
+(5, 'U6EZYGHLC8', '8/6/2022', 84, 'Leon')
+
+INSERT INTO Order_addrs(order_num, addr_id)
+VALUES
+(1, 3),
+(2, 5),
+(3, 7),
+(4, 8),
+(5, 9)
+
+INSERT INTO In_Orders(isbn, order_num, quantity)
+VALUES
+('523605904-6', 1, 3),
+('499050502-6', 1, 1),
+('480910812-0', 2, 2),
+('460503309-2', 2, 1),
+('845633627-0', 3, 5),
+('238501061-5', 3, 2),
+('007919126-6', 4, 10),
+('818074178-8', 4, 20),
+('808097694-5', 5, 1)
 
 INSERT INTO Genres (isbn, gname)
 VALUES
@@ -216,7 +261,7 @@ VALUES
 ('818074178-8', 'Horror'),
 ('598378647-4', 'Children'),
 ('823942962-9', 'War'),
-('887416486-6', 'Sci-Fi')
+('887416486-6', 'Sci-Fi'),
 ('622615924-3' ,'History'),
 ('622615924-3' ,'Satire'),
 ('909893829-9', 'Fantasy'),
@@ -224,13 +269,13 @@ VALUES
 ('909893829-9', 'Satire'),
 ('428308507-3', 'Noir'),
 ('643000129-6', 'Cyberpunk'),
-('007919126-6', 'Mystery')
-('007919126-6', 'Non-Fiction')
-('113648857-X', 'Adventure')
+('007919126-6', 'Mystery'),
+('007919126-6', 'Non-Fiction'),
+('113648857-X', 'Adventure'),
 ('007919126-6', 'Crime'),
 ('113648857-X', 'Mystery'),
 ('113648857-X', 'War'),
-('238501061-5', 'Children')),
+('238501061-5', 'Children'),
 ('710737254-8', 'War'),
 ('710737254-8', 'Cyberpunk'),
 ('710737254-8', 'Romance'),
@@ -253,7 +298,7 @@ VALUES
 ('191711496-6', 'Adventure'),
 ('908142405-X', 'Non-Fiction'),
 ('842953482-2', 'Satire'),
-('523605904-6', 'Animation'),
+('523605904-6', 'Animation')
 
 INSERT INTO Authors (aid, fname, lname)
 VALUES
@@ -281,7 +326,7 @@ VALUES
 (22, 'Tiphanie', 'Belchamp'),
 (23, 'Mannie', 'Nann'),
 (24, 'Douglas', 'Pancoust'),
-(25, 'Roxanne', 'Pickard'),
+(25, 'Roxanne', 'Pickard')
 
 INSERT INTO Authored(aid, isbn)
 VALUES
@@ -315,5 +360,5 @@ VALUES
 (22, '908142405-X'),
 (23, '842953482-2'),
 (24, '012490413-0'),
-(25, '523605904-6'),
+(25, '523605904-6')
 
