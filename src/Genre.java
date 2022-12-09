@@ -4,11 +4,12 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class Books {
+public class Genre {
     //establishes connection to your local server
     //-> Go to Config.java and change those values to your own connection stuff
     public static Connection connection;
     public static Statement statement;
+
     static {
         try {
             connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
@@ -19,29 +20,26 @@ public class Books {
         }
     }
 
-    public static ArrayList<String[]> getAllBooks() {
+    public static ArrayList<String[]> getAllGenre() {
 
-        ArrayList<String[]> bookTuples = new ArrayList<>();
+        ArrayList<String[]> GenreTuples = new ArrayList<>();
         try {
             // TO DEVS: Use your local sql server here
             Connection connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
 
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from books");
+            ResultSet resultSet = statement.executeQuery("select * from Genres");
 
 
             while (resultSet.next()) {
-                bookTuples.add(new String[] {
+                GenreTuples.add(new String[]{
                         resultSet.getString("isbn"),
-                        resultSet.getString("title"),
-                        resultSet.getString("pages"),
-                        resultSet.getString("royalty_percent"),
-                        resultSet.getString("stock"),
+                        resultSet.getString("gname"),
                 });
             }
 
-            return bookTuples;
+            return GenreTuples;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -49,25 +47,22 @@ public class Books {
         return null;
     }
 
-    public static ArrayList<String[]> getBooksByTitle(String title) {
-        ArrayList<String[]> bookTuples = new ArrayList<>();
+    public static ArrayList<String[]> getGenre(String genre) {
+        ArrayList<String[]> GenreTuples = new ArrayList<>();
         try {
             // TO DEVS: Use your local sql server here
 
-            ResultSet resultSet = statement.executeQuery("select * from books where title = '" + title + "'");
+            ResultSet resultSet = statement.executeQuery("select * from Genres where gname = '" + genre + "'");
 
             while (resultSet.next()) {
-                bookTuples.add(new String[] {
+                GenreTuples.add(new String[]{
                         resultSet.getString("isbn"),
-                        resultSet.getString("title"),
-                        resultSet.getString("pages"),
-                        resultSet.getString("royalty"),
-                        resultSet.getString("stock"),
+                        resultSet.getString("gname"),
 
                 });
             }
 
-            return bookTuples;
+            return GenreTuples;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,17 +70,17 @@ public class Books {
         return null;
     }
 
-
-
-    public static void displayBooks(ArrayList<String[]> books) {
-        System.out.println(String.format("%10s %30s %10s %10s %10s %10s", "ISBN", "Title", "Pages", "Royalty", "Stock", "Genre(s)"));
+    public static void displayGenre(ArrayList<String[]> Genre) {
+        System.out.println(String.format("%10s %30s ", "ISBN", "Genre Name"));
         System.out.println("---------------------------------------------------------------------------------------------------------------");
-        for(String[] book : books) {
+        for(String[] Genres : Genre) {
             System.out.println(String.format(
-                    "%10s %30s %10s %10s %10s %10s %10s %10s",      //format spacing
+                    "%10s %30s",      //format spacing
 
-                    book[0], book[1], book[2], book[3], book[4]
+                    Genres[0], Genres[1]
             ));
         }
     }
+
+
 }
