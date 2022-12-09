@@ -3,11 +3,22 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Scanner;
-
 
 public class Books {
+    //establishes connection to your local server
+    //-> Go to Config.java and change those values to your own connection stuff
+    public static Connection connection;
+    public static Statement statement;
+    static {
+        try {
+            connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
+
+            statement = connection.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ArrayList<String[]> getAllBooks() {
 
         ArrayList<String[]> bookTuples = new ArrayList<>();
@@ -45,9 +56,6 @@ public class Books {
         ArrayList<String[]> bookTuples = new ArrayList<>();
         try {
             // TO DEVS: Use your local sql server here
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
-
-            Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("select * from books where title = '" + title + "'");
 
@@ -104,21 +112,18 @@ public class Books {
     }
 
     public static void displayBooks(ArrayList<String[]> books) {
-
-        Formatter fmt = new Formatter();
-        fmt.format("%20s %20s %20s %15s %20s %20s\n", "ISBN", "Title", "Pages", "Royalty", "Stock", "Genre(s)");
-        fmt.format("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println(String.format("%10s %30s %10s %10s %10s %10s", "ISBN", "Title", "Pages", "Royalty", "Stock", "Genre(s)"));
+        System.out.println("---------------------------------------------------------------------------------------------------------------");
         for(String[] book : books) {
-            for(String attribute : book) {
+            System.out.println(String.format(
+                    "%10s %30s %10s %10s %10s %10s %10s %10s",      //format spacing
 
-                if(attribute == null) continue;
+                    book[0], book[1], book[2], book[3], book[4],    //These are the first 5 attributes
 
-                if(attribute.equals("Title")) fmt.format("%30s", attribute);
-                else fmt.format("%20s", attribute);
-
-            }
-            fmt.format("\n");
+                    book[5] == null ? "" : book[5],                 //These are the genres, they can be null so we need to check first
+                    book[6] == null ? "" : book[6],
+                    book[7] == null ? "" : book[7]
+            ));
         }
-        System.out.println(fmt);
     }
 }

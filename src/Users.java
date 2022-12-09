@@ -5,6 +5,19 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Users {
+    //establishes connection to your local server
+    //-> Go to Config.java and change those values to your own connection stuff
+    public static Connection connection;
+    public static Statement statement;
+    static {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
+
+            statement = connection.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void checkCredentials() {
 
@@ -18,11 +31,6 @@ public class Users {
             String password = sc.nextLine();
 
             try {
-                // TO DEVS: Use your local sql server here
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
-
-                Statement statement = connection.createStatement();
-
                 ResultSet resultSet = statement.executeQuery("select * from users WHERE uname = '" + username + "' AND pword = '" + password + "'");
 
                 String fetchedUsername = "", fetchedPassword = "";
