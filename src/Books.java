@@ -61,7 +61,7 @@ public class Books {
                         resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("pages"),
-                        resultSet.getString("royalty"),
+                        resultSet.getString("royalty_percent"),
                         resultSet.getString("stock"),
 
                 });
@@ -82,7 +82,7 @@ public class Books {
         System.out.println("---------------------------------------------------------------------------------------------------------------");
         for(String[] book : books) {
             System.out.println(String.format(
-                    "%10s %30s %10s %10s %10s %10s %10s %10s",      //format spacing
+                    "%10s %30s %10s %10s %10s",      //format spacing
 
                     book[0], book[1], book[2], book[3], book[4]
             ));
