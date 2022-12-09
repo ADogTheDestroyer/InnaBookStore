@@ -24,7 +24,7 @@ public class Books {
         ArrayList<String[]> bookTuples = new ArrayList<>();
         try {
             // TO DEVS: Use your local sql server here
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
+            Connection connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
 
             Statement statement = connection.createStatement();
 
@@ -84,7 +84,7 @@ public class Books {
         ArrayList<String[]> bookTuples = new ArrayList<>();
         try {
             // TO DEVS: Use your local sql server here
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/LookInnaBookDb", "root", "SQLwhaley1*");
+            Connection connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
 
             Statement statement = connection.createStatement();
 
