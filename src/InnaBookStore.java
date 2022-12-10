@@ -1,9 +1,11 @@
-import java.sql.ResultSet;
+
+import java.util.ArrayList;
+
 import java.util.Scanner;
 public class InnaBookStore {
     public static void main(String [] args) {
         Scanner sc = new Scanner(System.in);
-
+        ArrayList<String[]> checkoutBasket = new ArrayList<>();
         System.out.println("--------------------------------");
         System.out.println("|  Welcome to InnaBook Store   |");
         System.out.println("--------------------------------");
@@ -35,7 +37,12 @@ public class InnaBookStore {
                         }
                     }
                     else if(textInput.equals("2")) {
-                        continue;
+                        //ArrayList<String[]> temp=Orders.getOrder();
+                        for (String[]items:temp){
+                            checkoutBasket.add(items);
+                        }
+                        System.out.println("This Is What Your basket Looks Like:");
+                        Books.displayBooks(checkoutBasket);
                     }
                     else if(textInput.equals("3")) {
                         while(true) {
@@ -63,7 +70,6 @@ public class InnaBookStore {
                 }
             }
             else if(textInput.equals("3")) {
-
                 System.out.println("Printing All Books:");
                 Books.displayBooks(Books.getAllBooks());
 
