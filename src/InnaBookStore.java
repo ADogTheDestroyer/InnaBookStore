@@ -36,6 +36,24 @@ public class InnaBookStore {
                             Books.displayBooks(Books.getBooksByTitle(textInput));
                         }
                     }
+                    else if(textInput.equals("2")) {
+                        while(true) {
+                            System.out.print("Search for author (firstname, lastname): ");
+                            textInput = sc.nextLine();
+
+                            if(textInput.equals("-1")) break;
+
+                            String[] queryArgs = textInput.split(" ");
+
+                            if(queryArgs.length != 2) {
+
+                                System.out.println("Must enter the authors first, and last name, separated by a space");
+                                continue;
+                            }
+
+                            Books.displayBooks(Books.getBooksByAuthor(queryArgs[0], queryArgs[1]));
+                        }
+                    }
                     else if(textInput.equals("3")) {
                         while(true) {
                             System.out.print("Search for Genre: ");

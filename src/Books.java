@@ -75,6 +75,36 @@ public class Books {
         return null;
     }
 
+    public static ArrayList<String[]> getBooksByAuthor(String fname, String lname) {
+        ArrayList<String[]> bookTuples = new ArrayList<>();
+        try {
+            // TO DEVS: Use your local sql server here
+
+            ResultSet resultSet = statement.executeQuery("""
+                SELECT * FROM books INNER JOIN  authored ON books.isbn = authored.isbn INNER JOIN authors ON authored.aid = authors.aid
+                WHERE authors.fname = '%s' AND authors.lname = '%s'
+                """.formatted(fname, lname)
+            );
+
+            while (resultSet.next()) {
+                bookTuples.add(new String[] {
+                        resultSet.getString("isbn"),
+                        resultSet.getString("title"),
+                        resultSet.getString("pages"),
+                        resultSet.getString("pages"),
+                        resultSet.getString("royalty_percent"),
+                        resultSet.getString("stock"),
+                });
+            }
+
+            return bookTuples;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static ArrayList<String[]> getBooksByGenre(String genre) {
         ArrayList<String[]> bookTuples = new ArrayList<>();
         try {
