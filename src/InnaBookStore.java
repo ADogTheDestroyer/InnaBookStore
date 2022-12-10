@@ -48,6 +48,9 @@ public class InnaBookStore {
                     }
                 }
             }
+            else if(textInput.equals("3")) {
+                Orders.getOrder();
+            }
         }
     }
 }
