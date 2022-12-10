@@ -40,7 +40,7 @@ public class InnaBookStore {
 
                             if(textInput.equals("-1")) break;
 
-                            Genre.displayGenre(Genre.getGenre(textInput));
+                            Books.displayBooks(Books.getBooksByGenre(textInput));
                         }
                     }
                     else if(textInput.equals("4")) {
