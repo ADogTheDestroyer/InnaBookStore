@@ -23,10 +23,6 @@ public class Orders {
     public static ArrayList<String[]> getOrder() {
         ArrayList<String[]> TheOrders = new ArrayList<>();
         try {
-            // TO DEVS: Use your local sql server here
-            Connection connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
-
-            Statement statement = connection.createStatement();
 
             // ResultSet resultSet = statement.executeQuery("select * from books");
             Scanner sc = new Scanner(System.in);
@@ -44,12 +40,12 @@ public class Orders {
                             resultSet.getString("isbn"),
                             resultSet.getString("title"),
                             resultSet.getString("pages"),
+                            resultSet.getString("price"),
                             resultSet.getString("royalty_percent"),
                             resultSet.getString("stock"),
                     });
                 }
             }
-            Books.displayBooks(TheOrders);
             return TheOrders;
 
         } catch (Exception e) {
