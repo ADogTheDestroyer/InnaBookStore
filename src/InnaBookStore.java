@@ -68,19 +68,41 @@ public class InnaBookStore {
             else if(textInput.equals("3")) {
                 System.out.println("Printing All Books:");
                 Books.displayBooks(Books.getAllBooks());
-
-                while (!textInput.equals("quit")){
+                String Ainput="Sully";
+                while (!Ainput.equals("quit")){
                     System.out.println("Write quit to leave this page!");
                     System.out.println("Please write the title of the book you want to buy:");
-                    textInput = sc.nextLine();
+                    Ainput = sc.nextLine();
 
-                    ArrayList<String[]> temp=Books.getBooksByTitle(textInput);
+                    ArrayList<String[]> temp=Books.getBooksByTitle(Ainput);
                     for (String[]items:temp){
                         checkoutBasket.add(items);
                     }
 
-                    Books.displayBooks(Books.getBooksByTitle(textInput));
+                    Books.displayBooks(Books.getBooksByTitle(Ainput));
                 }
+            }
+            else if(textInput.equals("4")) {
+                System.out.println("Printing All Items in Checkout Basket:");
+                Books.displayBooks(checkoutBasket);
+                String Rinput="Sully";
+                while (!Rinput.equals("quit")){
+                    System.out.println("Choose Title You Want to Remove::");
+                    Rinput = sc.nextLine();
+                    for(int i=0;i<checkoutBasket.size();i++){
+                        if(checkoutBasket.get(i)[1].equals(Rinput)){
+                            checkoutBasket.remove(i);
+                            break;
+                        }
+                        if(checkoutBasket.size()==0){
+                            Rinput="quit";
+                        }
+
+                    }
+                    System.out.println("Here is the new Checkout Basket:");
+                    Books.displayBooks(checkoutBasket);
+                }
+
             }
         }
     }

@@ -3,8 +3,8 @@ public class CommonOutput {
         System.out.println("\nMain Menu");
         System.out.println("1) Search for books by...");
         System.out.println("2) View Checkout Basket");
-        System.out.println("3) Add to order");
-        System.out.println("4) View statistical data");
+        System.out.println("3) Add to Order");
+        System.out.println("4) Remove Item From Order");
     }
 
     public static void searchMenu() {
