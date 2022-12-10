@@ -115,7 +115,6 @@ public class InnaBookStore {
                         if(checkoutBasket.size()==0){
                             Rinput="quit";
                         }
-
                     }
                     System.out.println("Here is the new Checkout Basket:");
                     Books.displayBooks(checkoutBasket);
