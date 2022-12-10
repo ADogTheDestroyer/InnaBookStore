@@ -36,14 +36,6 @@ public class InnaBookStore {
                             Books.displayBooks(Books.getBooksByTitle(textInput));
                         }
                     }
-                    else if(textInput.equals("2")) {
-                        //ArrayList<String[]> temp=Orders.getOrder();
-                        for (String[]items:temp){
-                            checkoutBasket.add(items);
-                        }
-                        System.out.println("This Is What Your basket Looks Like:");
-                        Books.displayBooks(checkoutBasket);
-                    }
                     else if(textInput.equals("3")) {
                         while(true) {
                             System.out.print("Search for Genre: ");
@@ -69,6 +61,10 @@ public class InnaBookStore {
                     }
                 }
             }
+            else if(textInput.equals("2")) {
+                System.out.println("This Is What Your basket Looks Like:");
+                Books.displayBooks(checkoutBasket);
+            }
             else if(textInput.equals("3")) {
                 System.out.println("Printing All Books:");
                 Books.displayBooks(Books.getAllBooks());
@@ -77,6 +73,11 @@ public class InnaBookStore {
                     System.out.println("Write quit to leave this page!");
                     System.out.println("Please write the title of the book you want to buy:");
                     textInput = sc.nextLine();
+
+                    ArrayList<String[]> temp=Books.getBooksByTitle(textInput);
+                    for (String[]items:temp){
+                        checkoutBasket.add(items);
+                    }
 
                     Books.displayBooks(Books.getBooksByTitle(textInput));
                 }
