@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.util.Scanner;
 public class InnaBookStore {
     public static void main(String [] args) {
@@ -33,6 +34,9 @@ public class InnaBookStore {
                             Books.displayBooks(Books.getBooksByTitle(textInput));
                         }
                     }
+                    else if(textInput.equals("2")) {
+                        continue;
+                    }
                     else if(textInput.equals("3")) {
                         while(true) {
                             System.out.print("Search for Genre: ");
@@ -44,12 +48,32 @@ public class InnaBookStore {
                         }
                     }
                     else if(textInput.equals("4")) {
+                        while(true) {
+                            System.out.print("Search for Publisher ID: ");
+                            textInput = sc.nextLine();
+
+                            if(textInput.equals("-1")) break;
+
+                            Books.displayBooks(Books.getBooksByPublisher(textInput));
+                        }
+                    }
+                    else if(textInput.equals("-1")) {
                         break;
                     }
                 }
             }
             else if(textInput.equals("3")) {
-                Orders.getOrder();
+
+                System.out.println("Printing All Books:");
+                Books.displayBooks(Books.getAllBooks());
+
+                while (!textInput.equals("quit")){
+                    System.out.println("Write quit to leave this page!");
+                    System.out.println("Please write the title of the book you want to buy:");
+                    textInput = sc.nextLine();
+
+                    Books.displayBooks(Books.getBooksByTitle(textInput));
+                }
             }
         }
     }

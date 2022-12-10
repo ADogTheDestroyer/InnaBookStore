@@ -12,6 +12,6 @@ public class CommonOutput {
         System.out.println("1) Title");
         System.out.println("2) Author");
         System.out.println("3) Genre");
-        System.out.println("4) Back");
+        System.out.println("4) Publisher ID");
     }
 }
