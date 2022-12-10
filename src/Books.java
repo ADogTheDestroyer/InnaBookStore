@@ -32,6 +32,7 @@ public class Books {
                 bookTuples.add(new String[] {
                         resultSet.getString("isbn"),
                         resultSet.getString("title"),
+                        resultSet.getString("price"),
                         resultSet.getString("pages"),
                         resultSet.getString("price"),
                         resultSet.getString("royalty_percent"),
@@ -59,6 +60,7 @@ public class Books {
                         resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("pages"),
+                        resultSet.getString("pages"),
                         resultSet.getString("royalty_percent"),
                         resultSet.getString("stock"),
 
@@ -77,6 +79,30 @@ public class Books {
         ArrayList<String[]> bookTuples = new ArrayList<>();
         try {
             ResultSet resultSet = statement.executeQuery("SELECT books.* FROM books INNER JOIN genres ON books.isbn = genres.isbn WHERE genres.gname = '" + genre + "'");
+
+            while (resultSet.next()) {
+                bookTuples.add(new String[] {
+                        resultSet.getString("isbn"),
+                        resultSet.getString("title"),
+                        resultSet.getString("pages"),
+                        resultSet.getString("price"),
+                        resultSet.getString("royalty_percent"),
+                        resultSet.getString("stock"),
+                });
+            }
+
+            return bookTuples;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static ArrayList<String[]> getBooksByPublisher(String publisherId) {
+        ArrayList<String[]> bookTuples = new ArrayList<>();
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT books.* FROM books INNER JOIN publishers ON books.pid = publishers.pid WHERE publishers.pid = '" + publisherId + "'");
 
             while (resultSet.next()) {
                 bookTuples.add(new String[] {
