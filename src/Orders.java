@@ -15,8 +15,16 @@ public class Orders {
             connection = DriverManager.getConnection(Config.connectionUrl, Config.username, Config.password);
 
             statement = connection.createStatement();
+
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public static void getOrder(ArrayList<String[]> myArr) {
+        for (String[]items:myArr){
+            if(Integer.parseInt(items[5])>3){
+                        break;
+            }
         }
     }
 }
