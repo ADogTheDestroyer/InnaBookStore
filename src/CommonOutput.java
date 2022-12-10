@@ -5,6 +5,7 @@ public class CommonOutput {
         System.out.println("2) View Checkout Basket");
         System.out.println("3) Add to Order");
         System.out.println("4) Remove Item From Order");
+        System.out.println("5) Go To Checkout Basket");
     }
 
     public static void searchMenu() {

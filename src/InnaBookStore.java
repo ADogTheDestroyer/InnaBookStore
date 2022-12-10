@@ -104,6 +104,16 @@ public class InnaBookStore {
                 }
 
             }
+            else if(textInput.equals("5")) {
+                String Cinput;
+                System.out.println("Here is your Basket:");
+                Books.displayBooks(checkoutBasket);
+                System.out.println("Type Yes to Place Order:");
+                Cinput = sc.nextLine();
+                if(Cinput.equals("Yes")){
+                    Orders.getOrder(checkoutBasket);
+                }
+            }
         }
     }
 }
