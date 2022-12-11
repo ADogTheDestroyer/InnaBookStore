@@ -65,6 +65,16 @@ public class InnaBookStore {
                         }
                     }
                     else if(textInput.equals("4")) {
+                        while(true) {
+                            System.out.print("Search for ISBN: ");
+                            textInput = sc.nextLine();
+
+                            if(textInput.equals("quit")) break;
+
+                            Books.displayBooks(Books.getBooksByISBN(textInput));
+                        }
+                    }
+                    else if(textInput.equals("5")) {
                         Books.displayBooks(Books.getAllBooks());
                     }
                     else if(textInput.equals("quit")) {
@@ -120,7 +130,6 @@ public class InnaBookStore {
                 }
 
             }
-
             else if(textInput.equals("5") && isOwner) {
                 while(true) {
                     CommonOutput.statsMenu();

@@ -14,10 +14,12 @@ public class CommonOutput {
         System.out.println("1) Title");
         System.out.println("2) Author");
         System.out.println("3) Genre");
-        System.out.println("4) All");
+        System.out.println("4) ISBN");
+        System.out.println("5) All");
     }
 
     public static void statsMenu() {
+        System.out.println("Statistics For Owner");
         System.out.println("1) Show orders of previous month");
         System.out.println("2) Show stores balance");
         System.out.println("3) Show stores expenditures of previous month");
