@@ -9,7 +9,7 @@ public class InnaBookStore {
         System.out.println("--------------------------------");
         System.out.println("|  Welcome to InnaBook Store   |");
         System.out.println("--------------------------------");
-
+        Users.loginPage();
         boolean isOwner = Users.checkCredentials();
 
         String textInput = "";
