@@ -147,7 +147,7 @@ public class InnaBookStore {
                     }
 
                     if(textInput.equals("3")) {
-                        Orders.generateTrackingNum();
+                        Orders.displayOrders(Orders.getAllOrders());
                     }
 
                     if(textInput.equals("-1")) {

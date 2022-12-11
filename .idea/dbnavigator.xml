@@ -17,10 +17,14 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" object-ref="schemas/public/tables/in_orders" />
+      <object connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" object-ref="schemas/public/tables/orders" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" dataset="public.in_orders" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" dataset="public.orders" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" dataset="public.authors" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
