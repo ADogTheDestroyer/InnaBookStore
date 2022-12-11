@@ -5,7 +5,8 @@ public class CommonOutput {
         System.out.println("2) Checkout Basket");
         System.out.println("3) Add to Order");
         System.out.println("4) Remove from Order");
-        if(isOwner) System.out.println("5) Store Stats (Owner Only)");
+        System.out.println("5) View your orders");
+        if(isOwner) System.out.println("6) Store Stats (Owner Only)");
 
     }
 
@@ -22,7 +23,7 @@ public class CommonOutput {
         System.out.println("Statistics For Owner");
         System.out.println("1) Show orders of previous month");
         System.out.println("2) Show stores balance");
-        System.out.println("3) Show stores expenditures of previous month");
+        System.out.println("3) Show order history");
         System.out.println("4) Add to Book Collection");
         System.out.println("5) Remove from Book Collection");
         System.out.println("6) Publisher Contact Information");
