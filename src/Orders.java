@@ -111,6 +111,7 @@ public class Orders {
             }
             insertToOrders(myArr, Users.getUsername());
 
+
             System.out.println("We Have processes youe Order!");
 
         } catch (Exception e) {
@@ -131,6 +132,10 @@ public class Orders {
                         INSERT INTO Orders (order_num, tracking_num, ord_date, ord_cost, username)
                         VALUES ( '%s', '%s', '%s', '%s', '%s' )
                     """.formatted(orderId, generateTrackingNum(), LocalDate.now(), computeCost(basket), username));
+
+            for(String[] item : basket) {
+                InOrders.upsert(item[0], Integer.toString(orderId));
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
