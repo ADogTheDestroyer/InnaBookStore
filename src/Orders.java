@@ -23,7 +23,6 @@ public class Orders {
         }
     }
 
-
     public static ArrayList<String[]> getAllOrders() {
         ArrayList<String[]> orderTuples = new ArrayList<>();
         try {
@@ -86,12 +85,8 @@ public class Orders {
         }
     }
 
-
     public static void getOrder(ArrayList<String[]> myArr) {
         try {
-            // TO DEVS: Use your local sql server here
-
-
             int count = 0;
             for (int i = 0; i < myArr.size(); i++) {
                 for (int x = 0; x < myArr.size(); x++) {
@@ -105,15 +100,59 @@ public class Orders {
                 }
                 count = 0;
             }
-            System.out.println("We Have processes youe Order!");
-            for (int i = 0; i < myArr.size(); i++) {
-                int newStock=Integer.parseInt(myArr.get(i)[5]);
-                newStock--;
 
-                statement.execute("UPDATE Books SET stock= '"+newStock+"' WHERE isbn= '"+myArr.get(i)[0]+"'");
+            for (int i = 0; i < myArr.size(); i++) {
+                int newStock = Integer.parseInt(myArr.get(i)[5]);
+                for(int x = i; x < myArr.size(); x++) { //heyo added this forloop so that it reflects if they buy two of the same book
+                    newStock--;
+                }
+
+                statement.execute("UPDATE Books SET stock= '" + newStock + "' WHERE isbn= '" + myArr.get(i)[0] + "'");
             }
+            insertToOrders(myArr, Users.getUsername());
+
+            System.out.println("We Have processes youe Order!");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static void insertToOrders(ArrayList<String[]> basket, String username) {
+
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS count FROM Orders");
+            int orderId = -1;
+            while(resultSet.next()) {
+                orderId = resultSet.getInt(1) + 1;
+            }
+
+            statement.execute("""
+                        INSERT INTO Orders (order_num, tracking_num, ord_date, ord_cost, username)
+                        VALUES ( '%s', '%s', '%s', '%s', '%s' )
+                    """.formatted(orderId, generateTrackingNum(), LocalDate.now(), computeCost(basket), username));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String generateTrackingNum() {
+        String alphaNumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        String trackingNumber = "";
+        for(int i = 0; i < 10; i++) {
+            trackingNumber += alphaNumeric.charAt((int) (Math.random() * alphaNumeric.length()));
+        }
+
+        return trackingNumber;
+    }
+
+    public static double computeCost(ArrayList<String[]> basket) {
+        double cost = 0;
+        for(String[] item : basket) {
+            cost += Double.parseDouble(item[3]);
+        }
+        return cost;
     }
 }

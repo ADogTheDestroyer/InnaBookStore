@@ -1,6 +1,3 @@
-
-import com.mysql.cj.x.protobuf.MysqlxCrud;
-
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -124,7 +121,6 @@ public class InnaBookStore {
                 }
 
             }
-
             else if(textInput.equals("5")) {
                 String Cinput;
                 System.out.println("Here is your Basket:");
@@ -148,6 +144,10 @@ public class InnaBookStore {
 
                     else if(textInput.equals("2")) {
                         System.out.println("LookInnaBook's balance is: " + StoreStats.balance + "\n");
+                    }
+
+                    if(textInput.equals("3")) {
+                        Orders.generateTrackingNum();
                     }
 
                     if(textInput.equals("-1")) {

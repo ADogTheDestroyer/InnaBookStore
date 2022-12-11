@@ -18,6 +18,10 @@ public class Users {
             e.printStackTrace();
         }
     }
+    private static String username;
+    public static String getUsername() {
+        return username;
+    }
 
     public static boolean checkCredentials() {
 
@@ -43,6 +47,7 @@ public class Users {
 
                 if(fetchedUsername.equals(username) && fetchedPassword.equals(password)) {
                     System.out.println("Welcome back " + fetchedUsername);
+                    Users.username = username;
                     return fetchedIsOwner;
                 } else {
                     System.out.println("Incorrect credentials, " + i + " attempts remaining\n");
