@@ -19,6 +19,9 @@ public class StoreStats {
     public static double balance = 50000;
     public static int numSales = 0;
 
+    public static void addToBalance(double cost, double royalty) {
+        balance += cost - (cost * (royalty/100));
+    }
 
     public static double getMonthlyRevenue() {
         ArrayList<String[]> ordersThisMonth = Orders.getLastMonth();
