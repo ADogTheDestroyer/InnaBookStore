@@ -79,10 +79,8 @@ public class Books {
         try {
             // TO DEVS: Use your local sql server here
 
-            ResultSet resultSet = statement.executeQuery("""
-                SELECT * FROM books INNER JOIN  authored ON books.isbn = authored.isbn INNER JOIN authors ON authored.aid = authors.aid
-                WHERE authors.fname = '%s' AND authors.lname = '%s'
-                """.formatted(fname, lname)
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM books INNER JOIN  authored ON books.isbn = authored.isbn INNER JOIN authors ON authored.aid = authors.aid WHERE authors.fname = '"+fname+"' AND authors.lname = '"+lname+"'"
+
             );
 
             while (resultSet.next()) {

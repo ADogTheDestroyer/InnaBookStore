@@ -27,16 +27,9 @@ public class InOrders {
             }
 
             if(size == 0) {
-                statement.execute("""
-                            INSERT INTO in_orders (isbn, order_num, quantity)
-                            VALUES ( '%s', '%s', '%s' )
-                        """.formatted(isbn, orderNum, 1));
+                statement.execute("INSERT INTO in_orders (isbn, order_num, quantity) VALUES ( '"+isbn+"', '"+orderNum+"', '"+1+"' )");
             } else {
-                statement.executeUpdate("""
-                            UPDATE in_orders
-                            SET quantity = quantity + 1
-                            WHERE isbn = '%s' AND order_num = '%s'
-                        """.formatted(isbn, orderNum));
+                statement.executeUpdate("UPDATE in_orders SET quantity = quantity + 1 WHERE isbn = '"+isbn+"' AND order_num = '"+orderNum+"'");
             }
         } catch (Exception e) {
             e.printStackTrace();
