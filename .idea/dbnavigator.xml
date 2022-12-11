@@ -17,9 +17,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" object-ref="schemas/public/tables/authors" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="35b2a1dc-0292-49bf-a7ce-093cb6c34035" dataset="public.in_orders" active-filter-id="EMPTY_FILTER" />
@@ -527,5 +525,8 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
   </component>
 </project>

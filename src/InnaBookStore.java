@@ -1,4 +1,6 @@
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -6,15 +8,16 @@ public class InnaBookStore {
     public static void main(String [] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<String[]> checkoutBasket = new ArrayList<>();
+
         System.out.println("--------------------------------");
         System.out.println("|  Welcome to InnaBook Store   |");
         System.out.println("--------------------------------");
 
-        Users.checkCredentials();
+        boolean isOwner = Users.checkCredentials();
 
         String textInput = "";
         while(!textInput.equals("exit")) {
-            CommonOutput.menu();
+            CommonOutput.menu(isOwner);
             System.out.print("> ");
             textInput = sc.nextLine();
 
@@ -115,13 +118,13 @@ public class InnaBookStore {
                         if(checkoutBasket.size()==0){
                             Rinput="quit";
                         }
-
                     }
                     System.out.println("Here is the new Checkout Basket:");
                     Books.displayBooks(checkoutBasket);
                 }
 
             }
+
             else if(textInput.equals("5")) {
                 String Cinput;
                 System.out.println("Here is your Basket:");
@@ -130,6 +133,26 @@ public class InnaBookStore {
                 Cinput = sc.nextLine();
                 if(Cinput.equals("Yes")){
                     Orders.getOrder(checkoutBasket);
+                }
+            }
+
+            else if(textInput.equals("6") && isOwner) {
+                while(true) {
+                    CommonOutput.statsMenu();
+                    System.out.print("> ");
+                    textInput = sc.nextLine();
+
+                    if(textInput.equals("1")) {
+                        StoreStats.showLastMonthOrders();
+                    }
+
+                    else if(textInput.equals("2")) {
+                        System.out.println("LookInnaBook's balance is: " + StoreStats.balance + "\n");
+                    }
+
+                    if(textInput.equals("-1")) {
+                        break;
+                    }
                 }
             }
         }
