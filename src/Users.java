@@ -24,7 +24,7 @@ public class Users {
     }
 
     public static boolean checkCredentials() {
-
+        System.out.println();
         Scanner sc = new Scanner(System.in);
 
         for(int i = 2; i >=0; i--) {
@@ -61,4 +61,89 @@ public class Users {
         System.exit(0);
         return false;
     }
+    public static boolean loginPage() {
+        Scanner sc = new Scanner(System.in);
+        String LInput = "";
+        while(!LInput.equals("1") && !LInput.equals("2")) {
+            System.out.println("1.Login ");
+            System.out.println("2.Register");
+            LInput=sc.nextLine();
+        }
+        if(LInput.equals("1")){
+            return true;
+        }
+        else{
+            try {
+                boolean ok=true;
+                String UInput="";
+                String PInput="";
+                String FNInput="";
+                String LNInput="";
+                while(ok=true){
+                    System.out.print("Please Enter a Unique Username:");
+                    UInput = sc.nextLine();
+                    ResultSet resultSet = statement.executeQuery("select * from users");
+                    String getUsername;
+                    while (resultSet.next()) {
+                        getUsername = resultSet.getString("username");
+                        if (UInput.equals(getUsername)) {
+                            System.out.println("This Username already exist please choose another one");
+                            ok=false;
+                        }
+                    }
+                    if(ok=true){
+                        if(UInput.length()==0){
+                            System.out.println("You have to Type Something for UserName");
+                        }
+                        else{
+                            break;
+
+                        }
+                    }
+                }
+                while(true){
+                    System.out.print("Please Enter a Password:");
+                    PInput=sc.nextLine();
+                    if(PInput.length()==0){
+                        System.out.println("You have to Type Something for Password");
+                    }
+                    else{
+                        break;
+
+                    }
+                }
+                while(true) {
+                    System.out.print("Enter Your First Name:");
+                    FNInput=sc.nextLine();
+                    if(FNInput.length()==0){
+                        System.out.println("You have to Type Something for First Name");
+                    }
+                    else{
+                        break;
+
+                    }
+                }
+                while(true) {
+                    System.out.print("Enter Your Last Name:");
+                    LNInput = sc.nextLine();
+                    if(LNInput.length()==0){
+                        System.out.println("You have to Type Something for Last Name");
+                    }
+                    else{
+                        break;
+
+                    }
+                }
+                statement.execute("INSERT INTO users(username,pword,fname,lname,isowner) VALUES('"+UInput+"','"+PInput+"','"+FNInput+"','"+LNInput+"','"+false+"')");
+                return true;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+        return true;
+    }
+
+
 }
