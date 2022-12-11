@@ -19,7 +19,7 @@ public class Users {
         }
     }
 
-    public static void checkCredentials() {
+    public static boolean checkCredentials() {
 
         Scanner sc = new Scanner(System.in);
 
@@ -34,14 +34,16 @@ public class Users {
                 ResultSet resultSet = statement.executeQuery("select * from users WHERE username = '" + username + "' AND pword = '" + password + "'");
 
                 String fetchedUsername = "", fetchedPassword = "";
+                boolean fetchedIsOwner = false;
                 while (resultSet.next()) {
                     fetchedUsername = resultSet.getString("username");
                     fetchedPassword = resultSet.getString("pword");
+                    fetchedIsOwner = resultSet.getBoolean("isowner");
                 }
 
                 if(fetchedUsername.equals(username) && fetchedPassword.equals(password)) {
                     System.out.println("Welcome back " + fetchedUsername);
-                    return;
+                    return fetchedIsOwner;
                 } else {
                     System.out.println("Incorrect credentials, " + i + " attempts remaining\n");
                 }
@@ -52,5 +54,6 @@ public class Users {
 
         System.out.println("Sorry, too many tries. :(");
         System.exit(0);
+        return false;
     }
 }

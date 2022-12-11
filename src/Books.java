@@ -32,7 +32,6 @@ public class Books {
                 bookTuples.add(new String[] {
                         resultSet.getString("isbn"),
                         resultSet.getString("title"),
-                        resultSet.getString("price"),
                         resultSet.getString("pages"),
                         resultSet.getString("price"),
                         resultSet.getString("royalty_percent"),
@@ -91,7 +90,7 @@ public class Books {
                         resultSet.getString("isbn"),
                         resultSet.getString("title"),
                         resultSet.getString("pages"),
-                        resultSet.getString("pages"),
+                        resultSet.getString("price"),
                         resultSet.getString("royalty_percent"),
                         resultSet.getString("stock"),
                 });
