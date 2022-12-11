@@ -5,7 +5,9 @@ public class CommonOutput {
         System.out.println("2) View Checkout Basket");
         System.out.println("3) Add to Order");
         System.out.println("4) Remove Item From Order");
-        if(isOwner) System.out.println("5) Show store stats");
+        System.out.println("5) Go To Checkout Basket");
+        if(isOwner) System.out.println("6) Show store stats");
+
     }
 
     public static void searchMenu() {
