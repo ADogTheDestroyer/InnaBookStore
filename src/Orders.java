@@ -23,7 +23,6 @@ public class Orders {
         }
     }
 
-
     public static ArrayList<String[]> getAllOrders() {
         ArrayList<String[]> orderTuples = new ArrayList<>();
         try {
@@ -85,7 +84,6 @@ public class Orders {
             ));
         }
     }
-
 
     public static void getOrder(ArrayList<String[]> myArr) {
         try {
