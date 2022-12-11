@@ -1,12 +1,11 @@
 public class CommonOutput {
     public static void menu(boolean isOwner) {
         System.out.println("\nMain Menu");
-        System.out.println("1) Search for books by...");
-        System.out.println("2) View Checkout Basket");
+        System.out.println("1) Browse books");
+        System.out.println("2) Checkout Basket");
         System.out.println("3) Add to Order");
-        System.out.println("4) Remove Item From Order");
-        System.out.println("5) Go To Checkout Basket");
-        if(isOwner) System.out.println("6) Show store stats");
+        System.out.println("4) Remove from Order");
+        if(isOwner) System.out.println("5) Store Stats (Owner Only)");
 
     }
 
@@ -15,7 +14,7 @@ public class CommonOutput {
         System.out.println("1) Title");
         System.out.println("2) Author");
         System.out.println("3) Genre");
-        System.out.println("4) Publisher ID");
+        System.out.println("4) All");
     }
 
     public static void statsMenu() {

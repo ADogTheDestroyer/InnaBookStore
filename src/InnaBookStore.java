@@ -31,7 +31,7 @@ public class InnaBookStore {
                             System.out.print("Search for Title: ");
                             textInput = sc.nextLine();
 
-                            if(textInput.equals("-1")) break;
+                            if(textInput.equals("quit")) break;
 
                             Books.displayBooks(Books.getBooksByTitle(textInput));
                         }
@@ -41,7 +41,7 @@ public class InnaBookStore {
                             System.out.print("Search for author (firstname, lastname): ");
                             textInput = sc.nextLine();
 
-                            if(textInput.equals("-1")) break;
+                            if(textInput.equals("quit")) break;
 
                             String[] queryArgs = textInput.split(" ");
 
@@ -59,29 +59,28 @@ public class InnaBookStore {
                             System.out.print("Search for Genre: ");
                             textInput = sc.nextLine();
 
-                            if(textInput.equals("-1")) break;
+                            if(textInput.equals("quit")) break;
 
                             Books.displayBooks(Books.getBooksByGenre(textInput));
                         }
                     }
                     else if(textInput.equals("4")) {
-                        while(true) {
-                            System.out.print("Search for Publisher ID: ");
-                            textInput = sc.nextLine();
-
-                            if(textInput.equals("-1")) break;
-
-                            Books.displayBooks(Books.getBooksByPublisher(textInput));
-                        }
+                        Books.displayBooks(Books.getAllBooks());
                     }
-                    else if(textInput.equals("-1")) {
+                    else if(textInput.equals("quit")) {
                         break;
                     }
                 }
             }
             else if(textInput.equals("2")) {
-                System.out.println("This Is What Your basket Looks Like:");
+                String Cinput;
+                System.out.println("Here is your Basket:");
                 Books.displayBooks(checkoutBasket);
+                System.out.println("Type Yes to Place Order:");
+                Cinput = sc.nextLine();
+                if(Cinput.equals("Yes")){
+                    Orders.getOrder(checkoutBasket);
+                }
             }
             else if(textInput.equals("3")) {
                 System.out.println("Printing All Books:");
@@ -105,7 +104,7 @@ public class InnaBookStore {
                 Books.displayBooks(checkoutBasket);
                 String Rinput="Sully";
                 while (!Rinput.equals("quit")){
-                    System.out.println("Choose Title You Want to Remove::");
+                    System.out.println("Choose Title You Want to Remove:");
                     Rinput = sc.nextLine();
                     for(int i=0;i<checkoutBasket.size();i++){
                         if(checkoutBasket.get(i)[1].equals(Rinput)){
@@ -121,18 +120,8 @@ public class InnaBookStore {
                 }
 
             }
-            else if(textInput.equals("5")) {
-                String Cinput;
-                System.out.println("Here is your Basket:");
-                Books.displayBooks(checkoutBasket);
-                System.out.println("Type Yes to Place Order:");
-                Cinput = sc.nextLine();
-                if(Cinput.equals("Yes")){
-                    Orders.getOrder(checkoutBasket);
-                }
-            }
 
-            else if(textInput.equals("6") && isOwner) {
+            else if(textInput.equals("5") && isOwner) {
                 while(true) {
                     CommonOutput.statsMenu();
                     System.out.print("> ");
@@ -150,7 +139,7 @@ public class InnaBookStore {
                         Orders.displayOrders(Orders.getAllOrders());
                     }
 
-                    if(textInput.equals("-1")) {
+                    if(textInput.equals("quit")) {
                         break;
                     }
                 }

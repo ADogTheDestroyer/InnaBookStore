@@ -86,6 +86,11 @@ public class Orders {
     }
 
     public static void getOrder(ArrayList<String[]> myArr) {
+
+        if(myArr.isEmpty()) {
+            System.out.println("Must have at least 1 item in basket to checkout");
+            return;
+        }
         try {
             int count = 0;
             for (int i = 0; i < myArr.size(); i++) {
@@ -112,7 +117,7 @@ public class Orders {
             insertToOrders(myArr, Users.getUsername());
 
 
-            System.out.println("We Have processes youe Order!");
+            System.out.println("We Have processes your Order!");
 
         } catch (Exception e) {
             e.printStackTrace();
