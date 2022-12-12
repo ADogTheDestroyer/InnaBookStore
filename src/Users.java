@@ -5,6 +5,15 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 public class Users {
+    static String theUserName="";
+    public static boolean setTheUserName(String a){
+            theUserName=a;
+            return true;
+    }
+    public static String getTheUserName(){
+        return theUserName;
+    }
+
     //establishes connection to your local server
     //-> Go to Config.java and change those values to your own connection stuff
     public static Connection connection;
@@ -48,6 +57,7 @@ public class Users {
                 if(fetchedUsername.equals(username) && fetchedPassword.equals(password)) {
                     System.out.println("Welcome back " + fetchedUsername);
                     Users.username = username;
+                    setTheUserName(username);
                     return fetchedIsOwner;
                 } else {
                     System.out.println("Incorrect credentials, " + i + " attempts remaining\n");
@@ -80,6 +90,7 @@ public class Users {
                 String FNInput="";
                 String LNInput="";
                 while(ok=true){
+                    boolean itsUnnique=true;
                     System.out.print("Please Enter a Unique Username:");
                     UInput = sc.nextLine();
                     ResultSet resultSet = statement.executeQuery("select * from users");
@@ -88,10 +99,10 @@ public class Users {
                         getUsername = resultSet.getString("username");
                         if (UInput.equals(getUsername)) {
                             System.out.println("This Username already exist please choose another one");
-                            ok=false;
+                            itsUnnique=false;
                         }
                     }
-                    if(ok=true){
+                    if(itsUnnique==true){
                         if(UInput.length()==0){
                             System.out.println("You have to Type Something for UserName");
                         }
@@ -135,13 +146,140 @@ public class Users {
                     }
                 }
                 statement.execute("INSERT INTO users(username,pword,fname,lname,isowner) VALUES('"+UInput+"','"+PInput+"','"+FNInput+"','"+LNInput+"','"+false+"')");
-                return true;
-
+                AddAddress(UInput);
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+
         }
+        return true;
+    }
+    public static boolean AddAddress(String userN) {
+        System.out.println();
+        Scanner sc = new Scanner(System.in);
+        try {
+            System.out.println("Time to add an address!");
+            String input1="";
+            int input2=2;
+            int input3=3;
+            String input4="";
+            String input5="";
+            String input6="";
+            String input7="";
+            while(true) {
+                System.out.print("Enter Street Name:");
+                input1 = sc.nextLine();
+                if(input1.length()==0){
+                    System.out.println("You have to Type Something for Street Name");
+                }
+                else{
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter Street Number:");
+                String Tempin = sc.nextLine();
+                if(Tempin.length()==0){
+                    System.out.println("You have to Type Something for Street Number");
+                }
+                else{
+                    input2=Integer.parseInt(Tempin);
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter Unit Number:");
+                String Tempin = sc.nextLine();
+                if(Tempin.length()==0){
+                    System.out.println("You have to Type Something for Unit Number");
+                }
+                else{
+                    input3=Integer.parseInt(Tempin);
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter City:");
+                input4 = sc.nextLine();
+                if(input4.length()==0){
+                    System.out.println("You have to Type Something for City");
+                }
+                else{
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter Province:");
+                input5 = sc.nextLine();
+                if(input5.length()==0){
+                    System.out.println("You have to Type Something for Province");
+                }
+                else{
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter Postal Code:");
+                input6 = sc.nextLine();
+                if(input6.length()==0){
+                    System.out.println("You have to Type Something for Postal Code");
+                }
+                else{
+                    break;
+
+                }
+            }
+            while(true) {
+                System.out.print("Enter Country:");
+                input7 = sc.nextLine();
+                if(input7.length()==0){
+                    System.out.println("You have to Type Something for Country");
+                }
+                else{
+                    break;
+
+                }
+            }
+            ResultSet myResult = statement.executeQuery("select * from addresses");
+            String getid="";
+            while (myResult.next()) {
+                getid = myResult.getString("addr_id");
+            }
+            int newid=Integer.parseInt(getid);
+            newid++;
+            statement.execute("INSERT INTO addresses(addr_id,street_name,street_num,unit,city,province,postal,country) VALUES('"+newid+"','"+input1+"','"+input2+"','"+input3+"','"+input4+"','"+input5+"','"+input6+"','"+input7+"')");
+            boolean ship=true;
+            boolean bill=true;
+            while(true){
+                System.out.print("Is This a shipping address(Y or N)");
+                String tempVal= sc.nextLine();
+                if(tempVal.equals("N")){
+                    ship=false;
+                    System.out.print("Is This a billing address(Y or N)");
+                    String tempVal2= sc.nextLine();
+                    if(tempVal2.equals("Y")){break;}
+                    if(tempVal2.equals("N")){bill=false;break;}
+                }
+                else if(tempVal.equals("Y")){
+                    System.out.print("Is This a billing address(Y or N)");
+                    String tempVal2= sc.nextLine();
+                    if(tempVal2.equals("Y")){break;}
+                    if(tempVal2.equals("N")){bill=false;break;}
+                }
+            }
+
+            statement.execute("INSERT INTO user_addrs(username,addr_id,isshipping,isbilling) VALUES('"+userN+"','"+newid+"','"+ship+"','"+bill+"')");
+            System.out.print("The Address is now added to your Account!!!");
+            return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         return true;
     }
 
