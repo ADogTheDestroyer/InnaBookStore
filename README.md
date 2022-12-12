@@ -18,3 +18,11 @@ A Simple command-line book store application with a PostgreSQL database.
 7. Run the program from the main method point located in InnaBookStore.java
 8. Test and enjoy :)
 
+## Additional Notes:
+1. If you are running the sql scripts from your pgAdmin, you will need to copy and paste the sql from InitDatabase.txt
+
+2. Each class aside from Config, InnaBookStore and StoreStats exist to Abstract/encapsulate complicated connection and sql code from the InnaBookStore (our main class)
+
+3. If you are not running this code form IntelliJ Ultimate, you will need to
+- download the connector driver from https://jdbc.postgresql.org/ then add it to the modules from File > Project Structure > Modules > Dependencies
+- add a pluggin called "Database Navigator" from File > Settings > Pluggins
