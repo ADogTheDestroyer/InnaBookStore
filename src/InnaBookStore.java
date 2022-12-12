@@ -89,7 +89,7 @@ public class InnaBookStore {
                 System.out.println("Type Yes to Place Order:");
                 Cinput = sc.nextLine();
                 if(Cinput.equals("Yes")){
-                    Orders.getOrder(checkoutBasket);
+                    Orders.sendOrder(checkoutBasket);
                 }
             }
             else if(textInput.equals("3")) {
@@ -130,7 +130,10 @@ public class InnaBookStore {
                 }
 
             }
-            else if(textInput.equals("5") && isOwner) {
+            else if(textInput.equals("5")) {
+                Orders.displayUsersOrders(Orders.getUsersOrders("Robo.adam10"));
+            }
+            else if(textInput.equals("6") && isOwner) {
                 while(true) {
                     CommonOutput.statsMenu();
                     System.out.print("> ");
