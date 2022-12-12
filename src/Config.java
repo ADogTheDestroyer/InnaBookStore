@@ -1,5 +1,5 @@
 public interface Config {
-    String connectionUrl = "jdbc:postgresql://localhost:5432/lookinnabookdb";
+    String connectionUrl = "jdbc:postgresql://localhost:5432/LookInnaBookDb";
     String username = "postgres";
-    String password = "BigSully123";
+    String password = "password";
 }

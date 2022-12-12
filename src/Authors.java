@@ -39,4 +39,28 @@ public class Authors {
         }
         return null;
     }
+
+    public static void insert(String fname, String lname, String isbn) {
+        try {
+            String aid = nextAid();
+            statement.execute("INSERT INTO authors (aid, fname, lname) VALUES ( '" + aid + "', '" + fname + "', '" + lname + "')");
+            statement.execute("INSERT INTO authored (aid, isbn) VALUES ( '" + aid + "', '" + isbn + "')");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String nextAid() {
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) AS count FROM authors");
+            int aid = -1;
+            while(resultSet.next()) {
+                aid = resultSet.getInt(1) + 1;
+            }
+            return String.valueOf(aid);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

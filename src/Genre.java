@@ -70,6 +70,16 @@ public class Genre {
         return null;
     }
 
+    public static void insert(String isbn, String[] genres) {
+        try {
+            for(String genre : genres) {
+                statement.execute("INSERT INTO genres (isbn, gname) VALUES ( '" + isbn + "', '" + genre + "')");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void displayGenre(ArrayList<String[]> Genre) {
         System.out.println(String.format("%10s %30s ", "ISBN", "Genre Name"));
         System.out.println("---------------------------------------------------------------------------------------------------------------");

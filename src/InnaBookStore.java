@@ -131,7 +131,7 @@ public class InnaBookStore {
 
             }
             else if(textInput.equals("5")) {
-                Orders.displayUsersOrders(Orders.getUsersOrders("Robo.adam10"));
+                Orders.displayUsersOrders(Orders.getUsersOrders(Users.getUsername()));
             }
             else if(textInput.equals("6") && isOwner) {
                 while(true) {
@@ -147,8 +147,12 @@ public class InnaBookStore {
                         System.out.println("LookInnaBook's balance is: " + StoreStats.balance + "\n");
                     }
 
-                    if(textInput.equals("3")) {
+                    else if(textInput.equals("3")) {
                         Orders.displayOrders(Orders.getAllOrders());
+                    }
+
+                    else if(textInput.equals("4")) {
+                        Books.bookSetup();
                     }
 
                     if(textInput.equals("quit")) {
