@@ -5,6 +5,8 @@ public class CommonOutput {
         System.out.println("2) Checkout Basket");
         System.out.println("3) Add to Order");
         System.out.println("4) Remove from Order");
+        System.out.println("6) Add a New Address");
+
         if(isOwner) System.out.println("5) Store Stats (Owner Only)");
 
     }

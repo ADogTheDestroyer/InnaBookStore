@@ -153,6 +153,9 @@ public class InnaBookStore {
                     }
                 }
             }
+            else if(textInput.equals("6")) {
+                Users.AddAddress(Users.getTheUserName());
+            }
         }
     }
 }
