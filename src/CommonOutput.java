@@ -8,6 +8,7 @@ public class CommonOutput {
 
         System.out.println("5) View your orders");
         if(isOwner) System.out.println("6) Store Stats (Owner Only)");
+        System.out.println("7) Add a new Address");
 
     }
 

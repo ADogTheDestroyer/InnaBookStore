@@ -156,7 +156,7 @@ public class InnaBookStore {
                     }
                 }
             }
-            else if(textInput.equals("6")) {
+            else if(textInput.equals("7")) {
                 Users.AddAddress(Users.getTheUserName());
             }
         }
