@@ -38,4 +38,13 @@ public class PhoneNumbers {
         }
         return null;
     }
+
+    public static void insert(String pid, String phoneNumber) {
+        try {
+            statement.execute("INSERT INTO phone_numbers (pid, phone_num) VALUES ( '" + pid + "', '" + phoneNumber + "')");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
