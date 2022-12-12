@@ -1,4 +1,4 @@
-# LookInnaBook Final Project for COMP3005 Winter 2022
+# LookInnaBook Final Project for COMP3005 Fall 2022
 A Simple command-line book store application with a PostgreSQL database.
 
 ## Tools
